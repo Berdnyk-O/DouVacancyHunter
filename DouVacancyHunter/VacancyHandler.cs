@@ -6,7 +6,7 @@ namespace DouVacancyHunter
 {
     public class VacancyHandler : JobPageFinder
     {
-        private FileWriter _writer;
+        private readonly FileWriter _writer;
 
         public VacancyHandler(string pathToFile, string jobsPageUrl, string technologyName, string experience)
             : base(jobsPageUrl, technologyName, experience)
@@ -16,25 +16,22 @@ namespace DouVacancyHunter
 
         public void Process()
         {
-            StringBuilder data = new(50);
+            StringBuilder data = new(100);
 
             var vacancies = FindVacancyListElement();
 
             foreach (var vacancy in vacancies)
             {
-                data.Append(GetVacancyDate(vacancy));
-                data.Append('\t');
-                data.Append(GetVacancyName(vacancy));
-                data.Append('\t');
-                data.Append(GetVacancySalary(vacancy));
-                data.Append('\t');
+                data.Append(GetVacancyDate(vacancy).PadRight(20));
+                data.Append(GetVacancyName(vacancy).PadRight(50));
+                data.Append(GetVacancySalary(vacancy).PadRight(30));
                 data.Append(GetVacancyCiti(vacancy));
                 data.Append('\n');
                 data.Append(GetVacancyDescription(vacancy));
                 data.Append("\n\n");
-
-                _writer.Write(data.ToString());
             }
+
+            _writer.Write(data.ToString());
         }
 
         private ReadOnlyCollection<IWebElement> FindVacancyListElement()
