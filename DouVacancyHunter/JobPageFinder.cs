@@ -10,7 +10,7 @@ namespace DouVacancyHunter
         private readonly string _technology;
         private readonly string _experience;
 
-        private readonly ChromeDriver _driver;
+        internal readonly ChromeDriver _driver;
 
         public JobPageFinder(string jobsPageUrl, string technologyName, string experience)
         {
@@ -27,11 +27,11 @@ namespace DouVacancyHunter
         {
             _driver.Navigate().GoToUrl(_jobsPageUrl);
 
-            SelectTechtology();
+            SelectTechnology();
             SelectExperience();
         }
 
-        private void SelectTechtology()
+        private void SelectTechnology()
         {
             IWebElement technologySelect = _driver.FindElement(By.Name("category"));
             technologySelect.SendKeys(_technology);
