@@ -13,6 +13,10 @@ namespace DouVacancyHunter
         private void button1_Click(object sender, EventArgs e)
         {
             IWebDriver driver = new ChromeDriver();
+            driver.Navigate().GoToUrl("https://jobs.dou.ua/");
+
+            IWebElement technologySelect = driver.FindElement(By.Name("category"));
+            technologySelect.SendKeys(".NET");
         }
     }
 }
