@@ -1,6 +1,6 @@
 ﻿namespace DouVacancyHunter
 {
-    public class TextFileWriter : FileWriter
+    public class TextFileWriter : IFileWriter
     {
         public string PathToFile {get; init; }
 

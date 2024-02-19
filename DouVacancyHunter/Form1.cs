@@ -1,23 +1,32 @@
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-
 namespace DouVacancyHunter
 {
     public partial class Form1 : Form
     {
-        VacancyHandler _jobPage;
+        private VacancyHandler _jobPage = null!;
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            _jobPage = new VacancyHandler("vacancies.txt", "https://jobs.dou.ua/", ".NET", "< 1 року");
+            SetStatus("Виконуєм пошук та парсинг сторінки");
 
+            _jobPage = new VacancyHandler("vacancies.txt", "https://jobs.dou.ua/", ".NET", "< 1 року");          
             _jobPage.Navigate();
             _jobPage.Process();
+            _jobPage.Close();
+
+            SetStatus("Сторінка опрацьована");
+        }
+
+        private void SetStatus(string text)
+        {
+            if (Controls["StatusLabel"] is Label StatusLabel)
+            {
+                StatusLabel.Text = text;
+            }
         }
     }
 }

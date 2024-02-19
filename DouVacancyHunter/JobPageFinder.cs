@@ -20,6 +20,7 @@ namespace DouVacancyHunter
 
             _driver = new ChromeDriver();
             _driver.Manage().Window.Maximize();
+
             Thread.Sleep(1000);
         }
         
@@ -29,13 +30,16 @@ namespace DouVacancyHunter
 
             SelectTechnology();
             SelectExperience();
+
+            Thread.Sleep(1000);
         }
 
         private void SelectTechnology()
         {
             IWebElement technologySelect = _driver.FindElement(By.Name("category"));
             technologySelect.SendKeys(_technology);
-            Thread.Sleep(2000);
+
+            Thread.Sleep(1000);
         }
 
         private void SelectExperience()
@@ -52,6 +56,12 @@ namespace DouVacancyHunter
                     break;
                 }
             }
+        }
+
+        public void Close()
+        {
+            _driver.Close();
+            _driver.Quit();
         }
     }
 }
