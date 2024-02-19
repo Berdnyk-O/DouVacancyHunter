@@ -6,7 +6,7 @@ namespace DouVacancyHunter
 {
     public class VacancyHandler : JobPageFinder
     {
-        private readonly FileWriter _writer;
+        private readonly IFileWriter _writer;
 
         public VacancyHandler(string pathToFile, string jobsPageUrl, string technologyName, string experience)
             : base(jobsPageUrl, technologyName, experience)

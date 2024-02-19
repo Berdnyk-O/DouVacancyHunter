@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DouVacancyHunter
+﻿namespace DouVacancyHunter
 {
-    public interface FileWriter
+    public interface IFileWriter
     {
         string PathToFile { get; init; }
 

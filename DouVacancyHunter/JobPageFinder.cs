@@ -10,7 +10,7 @@ namespace DouVacancyHunter
         private readonly string _technology;
         private readonly string _experience;
 
-        internal readonly ChromeDriver _driver;
+        internal readonly IWebDriver _driver;
 
         public JobPageFinder(string jobsPageUrl, string technologyName, string experience)
         {
@@ -18,8 +18,17 @@ namespace DouVacancyHunter
             _technology = technologyName;
             _experience = experience;
 
-            _driver = new ChromeDriver();
-            _driver.Manage().Window.Maximize();
+            var chromeDriverService = ChromeDriverService.CreateDefaultService();
+            chromeDriverService.HideCommandPromptWindow = true;
+
+            ChromeOptions options = new();
+            options.AddArgument("start-maximized");
+
+            _driver = new ChromeDriver(chromeDriverService, options);
+
+            //_driver = new ChromeDriver();
+            //_driver.Manage().Window.Maximize();
+
             Thread.Sleep(1000);
         }
         
@@ -29,13 +38,16 @@ namespace DouVacancyHunter
 
             SelectTechnology();
             SelectExperience();
+
+            Thread.Sleep(1000);
         }
 
         private void SelectTechnology()
         {
             IWebElement technologySelect = _driver.FindElement(By.Name("category"));
             technologySelect.SendKeys(_technology);
-            Thread.Sleep(2000);
+
+            Thread.Sleep(1000);
         }
 
         private void SelectExperience()
@@ -52,6 +64,12 @@ namespace DouVacancyHunter
                     break;
                 }
             }
+        }
+
+        public void Close()
+        {
+            _driver.Close();
+            _driver.Quit();
         }
     }
 }
