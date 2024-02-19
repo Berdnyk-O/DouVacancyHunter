@@ -5,6 +5,8 @@ namespace DouVacancyHunter
 {
     public partial class Form1 : Form
     {
+        JobPageFinder _jobPage;
+
         public Form1()
         {
             InitializeComponent();
@@ -12,7 +14,9 @@ namespace DouVacancyHunter
 
         private void button1_Click(object sender, EventArgs e)
         {
-            IWebDriver driver = new ChromeDriver();
+            _jobPage = new JobPageFinder("https://jobs.dou.ua/", ".NET", "< 1 року");
+
+            _jobPage.Navigate();
         }
     }
 }
