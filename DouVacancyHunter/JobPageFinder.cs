@@ -1,16 +1,16 @@
-﻿using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using System.Collections.ObjectModel;
 
 namespace DouVacancyHunter
 {
     public class JobPageFinder
     {
-        private string _jobsPageUrl;
-        private string _technology;
-        private string _experience;
+        private readonly string _jobsPageUrl;
+        private readonly string _technology;
+        private readonly string _experience;
 
-        private IWebDriver _driver;
+        private readonly ChromeDriver _driver;
 
         public JobPageFinder(string jobsPageUrl, string technologyName, string experience)
         {
@@ -19,11 +19,12 @@ namespace DouVacancyHunter
             _experience = experience;
 
             _driver = new ChromeDriver();
-            _driver.Navigate().GoToUrl(_jobsPageUrl);
         }
         
         public void Navigate()
         {
+            _driver.Navigate().GoToUrl(_jobsPageUrl);
+
             SelectTechtology();
             SelectExperience();
         }
@@ -40,12 +41,12 @@ namespace DouVacancyHunter
             IWebElement filterRegion = _driver.FindElement(By.ClassName("b-region-filter"));
             IWebElement experienceSelect = filterRegion.FindElement(By.TagName("ul"));
 
-            ReadOnlyCollection<IWebElement> childElements = experienceSelect.FindElements(By.XPath(".//*"));
-            foreach (IWebElement child in childElements)
+            ReadOnlyCollection<IWebElement> experienceItems = experienceSelect.FindElements(By.XPath(".//*"));
+            foreach (IWebElement experienceItem in experienceItems)
             {
-                if (child.Text == _experience)
+                if (experienceItem.Text == _experience)
                 {
-                    child.Click();
+                    experienceItem.Click();
                     break;
                 }
             }
