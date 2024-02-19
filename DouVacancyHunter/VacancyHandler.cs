@@ -1,33 +1,39 @@
 ﻿using OpenQA.Selenium;
 using System.Collections.ObjectModel;
+using System.Text;
 
 namespace DouVacancyHunter
 {
     public class VacancyHandler : JobPageFinder
     {
+        private FileWriter _writer;
 
-        public VacancyHandler(string jobsPageUrl, string technologyName, string experience)
+        public VacancyHandler(string pathToFile, string jobsPageUrl, string technologyName, string experience)
             : base(jobsPageUrl, technologyName, experience)
         {
+            _writer = new TextFileWriter(pathToFile);
         }
 
         public void Process()
         {
-            string date;
-            string name;
-            string salary;
-            string citi;
-            string description;
+            StringBuilder data = new(50);
 
             var vacancies = FindVacancyListElement();
 
             foreach (var vacancy in vacancies)
             {
-                date = GetVacancyDate(vacancy);
-                name = GetVacancyName(vacancy);
-                salary = GetVacancySalary(vacancy);
-                citi = GetVacancyCiti(vacancy);
-                description = GetVacancyDescription(vacancy);
+                data.Append(GetVacancyDate(vacancy));
+                data.Append('\t');
+                data.Append(GetVacancyName(vacancy));
+                data.Append('\t');
+                data.Append(GetVacancySalary(vacancy));
+                data.Append('\t');
+                data.Append(GetVacancyCiti(vacancy));
+                data.Append('\n');
+                data.Append(GetVacancyDescription(vacancy));
+                data.Append("\n\n");
+
+                _writer.Write(data.ToString());
             }
         }
 
