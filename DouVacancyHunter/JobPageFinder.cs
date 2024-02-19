@@ -27,11 +27,11 @@ namespace DouVacancyHunter
         {
             _driver.Navigate().GoToUrl(_jobsPageUrl);
 
-            SelectTechtology();
+            SelectTechnology();
             SelectExperience();
         }
 
-        private void SelectTechtology()
+        private void SelectTechnology()
         {
             IWebElement technologySelect = _driver.FindElement(By.Name("category"));
             technologySelect.SendKeys(_technology);
