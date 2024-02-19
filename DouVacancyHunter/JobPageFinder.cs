@@ -19,6 +19,8 @@ namespace DouVacancyHunter
             _experience = experience;
 
             _driver = new ChromeDriver();
+            _driver.Manage().Window.Maximize();
+            Thread.Sleep(1000);
         }
         
         public void Navigate()
@@ -33,7 +35,7 @@ namespace DouVacancyHunter
         {
             IWebElement technologySelect = _driver.FindElement(By.Name("category"));
             technologySelect.SendKeys(_technology);
-            Thread.Sleep(1000);
+            Thread.Sleep(2000);
         }
 
         private void SelectExperience()
@@ -46,7 +48,7 @@ namespace DouVacancyHunter
             {
                 if (experienceItem.Text == _experience)
                 {
-                    experienceItem.Click();
+                    experienceItem.FindElement(By.XPath(".//*")).Click();
                     break;
                 }
             }
