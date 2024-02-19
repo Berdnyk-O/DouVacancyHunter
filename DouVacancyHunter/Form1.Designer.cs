@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            Start = new Button();
             StatusLabel = new Label();
             SuspendLayout();
             // 
-            // button1
+            // Start
             // 
-            button1.Location = new Point(363, 77);
-            button1.Name = "button1";
-            button1.Size = new Size(174, 99);
-            button1.TabIndex = 0;
-            button1.Text = "Пошук";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += Button1_Click;
+            Start.Location = new Point(363, 77);
+            Start.Name = "Start";
+            Start.Size = new Size(174, 99);
+            Start.TabIndex = 0;
+            Start.Text = "Пошук";
+            Start.UseVisualStyleBackColor = true;
+            Start.Click += StartButtonClick;
             // 
             // StatusLabel
             // 
@@ -58,7 +58,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(549, 278);
             Controls.Add(StatusLabel);
-            Controls.Add(button1);
+            Controls.Add(Start);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -67,7 +67,7 @@
 
         #endregion
 
-        private Button button1;
+        private Button Start;
         private Label StatusLabel;
     }
 }

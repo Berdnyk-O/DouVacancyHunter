@@ -9,11 +9,11 @@ namespace DouVacancyHunter
             InitializeComponent();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void StartButtonClick(object sender, EventArgs e)
         {
             SetStatus("¬иконуЇм пошук та парсинг стор≥нки");
 
-            _jobPage = new VacancyHandler("vacancies.txt", "https://jobs.dou.ua/", ".NET", "< 1 року");          
+            _jobPage = new VacancyHandler("vacancies.txt", "https://jobs.dou.ua/", ".NET", "< 1 року");
             _jobPage.Navigate();
             _jobPage.Process();
             _jobPage.Close();
@@ -28,5 +28,7 @@ namespace DouVacancyHunter
                 StatusLabel.Text = text;
             }
         }
+
+       
     }
 }
