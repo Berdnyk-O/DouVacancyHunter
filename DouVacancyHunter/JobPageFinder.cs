@@ -10,7 +10,7 @@ namespace DouVacancyHunter
         private readonly string _technology;
         private readonly string _experience;
 
-        private readonly ChromeDriver _driver;
+        internal readonly ChromeDriver _driver;
 
         public JobPageFinder(string jobsPageUrl, string technologyName, string experience)
         {
