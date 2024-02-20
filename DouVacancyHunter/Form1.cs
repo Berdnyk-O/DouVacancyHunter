@@ -5,13 +5,13 @@ namespace DouVacancyHunter
 {
     public partial class Form1 : Form
     {
-        private NameValueCollection _appSettings = ConfigurationManager.AppSettings;
+        private NameValueCollection _appSettings;
         private VacancyHandler _jobPage = null!;
-
         public Form1()
         {
+            _appSettings = ConfigurationManager.AppSettings;
+            
             InitializeComponent();
-
             InitTextboxes();
         }
 
@@ -44,7 +44,7 @@ namespace DouVacancyHunter
         {
             Controls["PathTextBox"]!.Text = _appSettings["pathToFile"];
             Controls["TechnologyBox"]!.Text = _appSettings["technology"];
-            
+
             ComboBox expirienceBox = (ComboBox)Controls["ExperienceBox"]!;
             string[] expirienvveValue = _appSettings["experiencesList"]!.Split(';');
             expirienceBox.Items.AddRange(expirienvveValue);
@@ -65,6 +65,8 @@ namespace DouVacancyHunter
             return Controls["ExperienceBox"]!.Text;
         }
 
-
+        private void PathTextBox_TextChanged(object sender, EventArgs e)
+        {
+        }
     }
 }

@@ -64,6 +64,7 @@
             PathTextBox.Name = "PathTextBox";
             PathTextBox.Size = new Size(212, 27);
             PathTextBox.TabIndex = 2;
+            PathTextBox.TextChanged += PathTextBox_TextChanged;
             // 
             // TechnologyBox
             // 
