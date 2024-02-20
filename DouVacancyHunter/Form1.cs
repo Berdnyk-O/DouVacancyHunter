@@ -1,19 +1,30 @@
+using System.Collections.Specialized;
+using System.Configuration;
+
 namespace DouVacancyHunter
 {
     public partial class Form1 : Form
     {
+        private NameValueCollection _appSettings = ConfigurationManager.AppSettings;
         private VacancyHandler _jobPage = null!;
 
         public Form1()
         {
             InitializeComponent();
+
+            InitTextboxes();
         }
 
         private void StartButtonClick(object sender, EventArgs e)
         {
             SetStatus("¬иконуЇм пошук та парсинг стор≥нки");
 
-            _jobPage = new VacancyHandler("vacancies.txt", "https://jobs.dou.ua/", ".NET", "< 1 року");
+            _jobPage = new VacancyHandler(
+                GetPathTextBoxValue(),
+                _appSettings["url"]!,
+                GetTechnologyBoxValue(),
+                GetExperienceBoxValue());
+
             _jobPage.Navigate();
             _jobPage.Process();
             _jobPage.Close();
@@ -29,6 +40,31 @@ namespace DouVacancyHunter
             }
         }
 
-       
+        private void InitTextboxes()
+        {
+            Controls["PathTextBox"]!.Text = _appSettings["pathToFile"];
+            Controls["TechnologyBox"]!.Text = _appSettings["technology"];
+            
+            ComboBox expirienceBox = (ComboBox)Controls["ExperienceBox"]!;
+            string[] expirienvveValue = _appSettings["experiencesList"]!.Split(';');
+            expirienceBox.Items.AddRange(expirienvveValue);
+            expirienceBox.SelectedIndex = 0;
+        }
+        private string GetPathTextBoxValue()
+        {
+            return Controls["PathTextBox"]!.Text;
+        }
+
+        private string GetTechnologyBoxValue()
+        {
+            return Controls["TechnologyBox"]!.Text;
+        }
+
+        private string GetExperienceBoxValue()
+        {
+            return Controls["ExperienceBox"]!.Text;
+        }
+
+
     }
 }
