@@ -6,8 +6,14 @@
 
         public TextFileWriter(string pathToFile)
         {
-            PathToFile = pathToFile;
-            
+            if(!pathToFile.Contains(".txt"))
+            {
+                PathToFile = pathToFile + ".txt";
+            }
+            else
+            {
+                PathToFile = pathToFile;
+            }
         }
 
         public void Write(string text)
