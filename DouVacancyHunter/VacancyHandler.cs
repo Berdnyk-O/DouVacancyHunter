@@ -18,6 +18,7 @@ namespace DouVacancyHunter
         {
             StringBuilder data = new(100);
 
+            OpenList();
             var vacancies = FindVacancyListElement();
 
             foreach (var vacancy in vacancies)
@@ -32,6 +33,20 @@ namespace DouVacancyHunter
             }
 
             _writer.Write(data.ToString());
+        }
+
+        private void OpenList()
+        {
+            try
+            {
+                IWebElement? moreButton = _driver.FindElement(By.ClassName("more-btn"));
+                moreButton?.FindElement(By.XPath(".//*")).Click();
+                Thread.Sleep(1000);
+            }
+            catch
+            {
+            }
+
         }
 
         private ReadOnlyCollection<IWebElement> FindVacancyListElement()
@@ -64,7 +79,14 @@ namespace DouVacancyHunter
 
         private string GetVacancyCiti(IWebElement vacancy)
         {
-            return vacancy.FindElement(By.ClassName("cities")).Text;
+            try
+            {
+                return vacancy.FindElement(By.ClassName("cities")).Text;
+            }
+            catch (NoSuchElementException)
+            {
+                return "Місто не вказане";
+            }
         }
 
         private string GetVacancyDescription(IWebElement vacancy) 
