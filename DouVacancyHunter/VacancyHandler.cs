@@ -21,6 +21,7 @@ namespace DouVacancyHunter
             OpenList();
             var vacancies = FindVacancyListElement();
 
+            data.Append($"Parsing date: {DateTime.Now}\n\r");
             foreach (var vacancy in vacancies)
             {
                 data.Append(GetVacancyDate(vacancy).PadRight(20));
