@@ -5,8 +5,9 @@ namespace DouVacancyHunter
 {
     public partial class Form1 : Form
     {
-        private NameValueCollection _appSettings;
+        private readonly NameValueCollection _appSettings;
         private VacancyHandler _jobPage = null!;
+
         public Form1()
         {
             _appSettings = ConfigurationManager.AppSettings;
@@ -17,19 +18,26 @@ namespace DouVacancyHunter
 
         private void StartButtonClick(object sender, EventArgs e)
         {
-            SetStatus("Виконуєм пошук та парсинг сторінки");
+            if (ValidTextBoxes())
+            {
+                SetStatus("Виконуєм пошук та парсинг сторінки");
 
-            _jobPage = new VacancyHandler(
-                GetPathTextBoxValue(),
-                _appSettings["url"]!,
-                GetTechnologyBoxValue(),
-                GetExperienceBoxValue());
+                _jobPage = new VacancyHandler(
+                    GetPathTextBoxValue(),
+                    _appSettings["url"]!,
+                    GetTechnologyBoxValue(),
+                    GetExperienceBoxValue());
 
-            _jobPage.Navigate();
-            _jobPage.Process();
-            _jobPage.Close();
+                _jobPage.Navigate();
+                _jobPage.Process();
+                _jobPage.Close();
 
-            SetStatus("Сторінка опрацьована");
+                SetStatus("Сторінка опрацьована");
+            }
+            else
+            {
+                SetStatus("Помилка з парсингом даних з текстових полів");
+            }
         }
 
         private void SetStatus(string text)
@@ -40,15 +48,28 @@ namespace DouVacancyHunter
             }
         }
 
+
+        private bool ValidTextBoxes()
+        {
+            if (string.IsNullOrEmpty(PathTextBox.Text) || string.IsNullOrEmpty(TechnologyBox.Text)
+                    || string.IsNullOrEmpty(ExperienceBox.Text))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+
+
         private void InitTextboxes()
         {
-            Controls["PathTextBox"]!.Text = _appSettings["pathToFile"];
-            Controls["TechnologyBox"]!.Text = _appSettings["technology"];
+            PathTextBox.Text = _appSettings["pathToFile"];
+            TechnologyBox.Text = _appSettings["technology"];
 
-            ComboBox expirienceBox = (ComboBox)Controls["ExperienceBox"]!;
-            string[] expirienvveValue = _appSettings["experiencesList"]!.Split(';');
-            expirienceBox.Items.AddRange(expirienvveValue);
-            expirienceBox.SelectedIndex = 0;
+            string[] expirienceValue = _appSettings["experiencesList"]!.Split(';');
+            ExperienceBox.Items.AddRange(expirienceValue);
+            ExperienceBox.SelectedIndex = 0;
         }
         private string GetPathTextBoxValue()
         {
