@@ -102,6 +102,7 @@
             // 
             // ExperienceBox
             // 
+            ExperienceBox.DropDownStyle = ComboBoxStyle.DropDownList;
             ExperienceBox.FormattingEnabled = true;
             ExperienceBox.Location = new Point(33, 188);
             ExperienceBox.Name = "ExperienceBox";

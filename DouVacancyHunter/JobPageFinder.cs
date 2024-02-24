@@ -26,9 +26,6 @@ namespace DouVacancyHunter
 
             _driver = new ChromeDriver(chromeDriverService, options);
 
-            //_driver = new ChromeDriver();
-            //_driver.Manage().Window.Maximize();
-
             Thread.Sleep(1000);
         }
         
@@ -45,6 +42,14 @@ namespace DouVacancyHunter
         private void SelectTechnology()
         {
             IWebElement technologySelect = _driver.FindElement(By.Name("category"));
+
+            string technologySelectText = technologySelect.Text;
+
+            if(!technologySelectText.Contains(_technology))
+            {
+                throw new Exception("Технологію не знайдено");
+            }
+
             technologySelect.SendKeys(_technology);
 
             Thread.Sleep(1000);
