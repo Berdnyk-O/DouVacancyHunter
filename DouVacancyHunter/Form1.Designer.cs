@@ -40,9 +40,12 @@
             // 
             // Start
             // 
-            Start.Location = new Point(363, 77);
+            Start.FlatAppearance.BorderColor = SystemColors.ControlText;
+            Start.FlatAppearance.BorderSize = 2;
+            Start.FlatStyle = FlatStyle.System;
+            Start.Location = new Point(343, 50);
             Start.Name = "Start";
-            Start.Size = new Size(174, 99);
+            Start.Size = new Size(145, 72);
             Start.TabIndex = 0;
             Start.Text = "Пошук";
             Start.UseVisualStyleBackColor = true;
@@ -51,11 +54,11 @@
             // StatusLabel
             // 
             StatusLabel.AutoSize = true;
-            StatusLabel.Location = new Point(246, 235);
-            StatusLabel.MaximumSize = new Size(100, 0);
-            StatusLabel.MinimumSize = new Size(300, 0);
+            StatusLabel.Location = new Point(275, 152);
+            StatusLabel.MaximumSize = new Size(100, 50);
+            StatusLabel.MinimumSize = new Size(250, 50);
             StatusLabel.Name = "StatusLabel";
-            StatusLabel.Size = new Size(300, 20);
+            StatusLabel.Size = new Size(250, 50);
             StatusLabel.TabIndex = 1;
             // 
             // PathTextBox
@@ -64,7 +67,6 @@
             PathTextBox.Name = "PathTextBox";
             PathTextBox.Size = new Size(212, 27);
             PathTextBox.TabIndex = 2;
-            PathTextBox.TextChanged += PathTextBox_TextChanged;
             // 
             // TechnologyBox
             // 
@@ -113,6 +115,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoValidate = AutoValidate.EnablePreventFocusChange;
             ClientSize = new Size(549, 278);
             Controls.Add(ExperienceBox);
             Controls.Add(label3);
@@ -122,8 +125,9 @@
             Controls.Add(PathTextBox);
             Controls.Add(StatusLabel);
             Controls.Add(Start);
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Name = "Form1";
-            Text = "Form1";
+            Text = "DouVacancyHunter";
             ResumeLayout(false);
             PerformLayout();
         }

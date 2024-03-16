@@ -11,7 +11,7 @@ namespace DouVacancyHunter
         public Form1()
         {
             _appSettings = ConfigurationManager.AppSettings;
-            
+
             InitializeComponent();
             InitTextboxes();
         }
@@ -48,7 +48,6 @@ namespace DouVacancyHunter
             }
         }
 
-
         private bool ValidTextBoxes()
         {
             if (string.IsNullOrEmpty(PathTextBox.Text) || string.IsNullOrEmpty(TechnologyBox.Text)
@@ -60,8 +59,6 @@ namespace DouVacancyHunter
             return true;
         }
 
-
-
         private void InitTextboxes()
         {
             PathTextBox.Text = _appSettings["pathToFile"];
@@ -71,6 +68,7 @@ namespace DouVacancyHunter
             ExperienceBox.Items.AddRange(expirienceValue);
             ExperienceBox.SelectedIndex = 0;
         }
+
         private string GetPathTextBoxValue()
         {
             return Controls["PathTextBox"]!.Text;
@@ -84,10 +82,6 @@ namespace DouVacancyHunter
         private string GetExperienceBoxValue()
         {
             return Controls["ExperienceBox"]!.Text;
-        }
-
-        private void PathTextBox_TextChanged(object sender, EventArgs e)
-        {
         }
     }
 }
